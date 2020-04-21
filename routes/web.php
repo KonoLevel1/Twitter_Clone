@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
 // タイムラインページを表示する
 Route::get('/timeline','TimelineController@index')->name('timeline.index');
 // つぶやき投稿
