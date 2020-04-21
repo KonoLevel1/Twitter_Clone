@@ -14,28 +14,35 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-// タイムライン表示ページ
+// タイムラインページを表示する
 Route::get('/timeline','TimelineController@index')->name('timeline.index');
 // つぶやき投稿
-Route::post('/timeline','TimelineController@up');
+Route::post('/timeline','TimelineController@tweet');
 // つぶやき削除
-Route::delete('/timeline','TimelineController@destroy');
+Route::delete('/timeline/{tweet_id}','TimelineController@destroy');
 
 // ユーザー一覧表示
 Route::get('/users','UsersController@index')->name('users.index');
+// ユーザー一覧表示
+Route::get('/users/{user_id}','UsersController@show')->name('users.show');
 
-// プロフィールを更新する
-Route::put('/profile','ProfileController@update');
-// アバター・プロフィール登録
-Route::post('/profile','ProfileController@store');
+// プロフィール更新
+Route::post('/profile','ProfileController@update');
 
-// フォロー・フォロワー一覧表示
-Route::get('/follower','FollowerController@index')->name('follower.index');
+// フォロワー一覧画面
+Route::get('/follower','FollowerController@index');
+
+// フォロー一覧画面
+Route::get('/follow','FollowController@index');
 // フォロー
-Route::post('/follower','FollowerController@store');
+Route::post('/follow/{user_id}','FollowController@follow');
 // フォロー解除
-Route::delete('/follower','FollowerController@destroy');
+Route::delete('/follow/{user_id}','FollowController@destroy');
 
+
+Route::get('/',function(){
+    return ('TEST');
+});
 
 Auth::routes();
 
